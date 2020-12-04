@@ -11,9 +11,23 @@
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <log4j.version>1.2.17</log4j.version>
+<!--    <org.slf4j.version>1.7.30</org.slf4j.version>-->
   </properties>
 
   <dependencies>
+    <!-- logging -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+<!--    <dependency> &lt;!&ndash; needed to bridge to slf4j for projects that use the log4j APIs directly &ndash;&gt;-->
+<!--      <groupId>org.slf4j</groupId>-->
+<!--      <artifactId>log4j-over-slf4j</artifactId>-->
+<!--      <version>${org.slf4j.version}</version>-->
+<!--    </dependency>-->
+
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
