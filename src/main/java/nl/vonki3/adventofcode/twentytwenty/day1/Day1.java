@@ -1,19 +1,19 @@
-package nl.vonki3.adventofcode.twentytwenty;
+package nl.vonki3.adventofcode.twentytwenty.day1;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import lombok.Data;
+import nl.vonki3.adventofcode.twentytwenty.util.InputReader;
 
 public class Day1 {
     public static void main(final String[] args) throws IOException {
-        final List<Integer> input = readInput("src/main/resources/input-day-2.txt");
-        final Day1 instance = new Day1();
-        final Solution solution1 = instance.part1(input);
-        final Solution solution2 = instance.part2(input);
+        InputReader<Integer> reader = new InputReader<>();
+        final List<Integer> input = reader.readInput("src/main/resources/input-day-1.txt", new IntegerInputMapper());
+
+        final Solution solution1 = Day1.part1(input);
+        final Solution solution2 = Day1.part2(input);
 
         System.out.println("\nDay 1-1:");
         System.out.println(solution1.toString());
@@ -22,48 +22,48 @@ public class Day1 {
 
     }
 
-    Solution part1(final List<Integer> input) {
+    static Solution part1(final List<Integer> input) {
         final List<Integer> x = new ArrayList<>(input);
         final List<Integer> y = new ArrayList<>(input);
         final Solution solution = new Solution();
 
-
-        x.forEach(i -> y.forEach(j -> {
-            if ((i + j) == 2020) {
-                solution.setSolution(i, j);
-                return;
-            }
-        }));
+        x.forEach(i ->
+                y.forEach(j -> {
+                    if ((i + j) == 2020) {
+                        solution.setSolution(i, j);
+                        return;
+                    }
+                }));
         return solution;
     }
 
-    Solution part2(final List<Integer> input) throws IOException {
+    static Solution part2(final List<Integer> input) {
         final List<Integer> x = new ArrayList<>(input);
         final List<Integer> y = new ArrayList<>(input);
         final List<Integer> z = new ArrayList<>(input);
         final Solution solution = new Solution();
 
-        x.forEach(i -> y.forEach(j -> z.forEach(k -> {
-            if ((i + j + k) == 2020) {
-                solution.setSolution(i, j, k);
-                return;
-            }
-        })));
+        x.forEach(i ->
+                y.forEach(j ->
+                        z.forEach(k -> {
+                            if ((i + j + k) == 2020) {
+                                solution.setSolution(i, j, k);
+                                return;
+                            }
+                        })));
         return solution;
     }
 
-    static List<Integer> readInput(final String fileName) throws IOException {
-        final List<Integer> result;
-        try (Stream<String> lines = Files.lines(Paths.get(fileName))) {
-            result = lines.map(Integer::valueOf).collect(Collectors.toList());
-        }
-        return result;
-    }
+//     static <T> List<T> readInput(final String fileName, MapInputInterface<T> mapper) throws IOException {
+//        final List<T> result;
+//        try (Stream<String> lines = Files.lines(Paths.get(fileName))) {
+//            result = lines.map(mapper::map).collect(Collectors.toList());
+//        }
+//        return result;
+//    }
 
-    /**
-     *
-     */
-    class Solution {
+    @Data
+    static class Solution {
         private Integer i;
         private Integer j;
         private Integer k;
@@ -80,18 +80,6 @@ public class Day1 {
             this.j = j;
             this.k = k;
             hasSolution = true;
-        }
-
-        public Integer getI() {
-            return i;
-        }
-
-        public Integer getJ() {
-            return j;
-        }
-
-        public Integer getK() {
-            return k;
         }
 
         @Override
