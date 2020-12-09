@@ -1,6 +1,6 @@
 package nl.vonki3.adventofcode.twentytwenty.day7;
 
-public class BagInputMapper implements nl.vonki3.adventofcode.twentytwenty.util.MapInputInterface<Bag> {
+public class Day7InputMapper implements nl.vonki3.adventofcode.twentytwenty.util.MapInputInterface<Bag> {
 
     @Override
     public Bag map(final String inputPart) {

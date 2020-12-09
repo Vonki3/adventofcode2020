@@ -15,9 +15,9 @@ class TestDay3 {
     void test () throws IOException {
         InputReader<List<Boolean>> reader = new InputReader<>();
         final List<List<Boolean>> input = reader.readInput("src/test/resources/input-day-3.txt", new Day3InputMapper());
-        assertEquals(7l, Day3.part1(input, 3, 1));
+        assertEquals(7L, Day3.part1(input, 3, 1));
 
         int[][] slopes = {{1,1},{3,1},{5,1},{7,1},{1,2}};
-        assertEquals(252l, Day3.part2(input, slopes));
+        assertEquals(252L, Day3.part2(input, slopes));
     }
 }

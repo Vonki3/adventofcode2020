@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.naming.NameNotFoundException;
@@ -19,7 +18,7 @@ public class Day7 {
 
     public static void main(final String[] args) throws IOException, NameNotFoundException {
         final InputReader<Bag> reader = new InputReader<>();
-        final List<Bag> input = reader.readInput("src/main/resources/input-day-7.txt", new BagInputMapper());
+        final List<Bag> input = reader.readInput("src/main/resources/input-day-7.txt", new Day7InputMapper());
 
         long part1 = Day7.part1(input, "shiny gold");
         long part2 = Day7.part2(input, "shiny gold");

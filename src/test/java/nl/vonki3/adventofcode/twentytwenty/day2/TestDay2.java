@@ -17,7 +17,7 @@ class TestDay2 {
     void test () throws IOException {
         InputReader<Day2Input> reader = new InputReader<>();
         final List<Day2Input> input = reader.readInput("src/test/resources/input-day-2.txt", new Day2InputMapper());
-        assertEquals(4l, Day2.part1(input));
-        assertEquals(1l, Day2.part2(input));
+        assertEquals(4L, Day2.part1(input));
+        assertEquals(1L, Day2.part2(input));
     }
 }

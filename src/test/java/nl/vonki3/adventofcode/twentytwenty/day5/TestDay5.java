@@ -16,17 +16,17 @@ class TestDay5 {
     void testPart1 () throws IOException {
         InputReader<String> reader = new InputReader<>();
         final List<String> input = reader.readInput("src/test/resources/input-day-5.txt", new StringInputMapper());
-        assertEquals(357l, Day5.calculate(input.get(0)));
+        assertEquals(357L, Day5.calculate(input.get(0)));
         assertEquals(567L, Day5.calculate(input.get(1)));
-        assertEquals(119l, Day5.calculate(input.get(2)));
-        assertEquals(820l, Day5.calculate(input.get(3)));
+        assertEquals(119L, Day5.calculate(input.get(2)));
+        assertEquals(820L, Day5.calculate(input.get(3)));
     }
 
     @Test
     void testPart2 () throws IOException {
         InputReader<String> reader = new InputReader<>();
         final List<String> input = reader.readInput("src/main/resources/input-day-5.txt", new StringInputMapper());
-        assertEquals(610l, Day5.part2(input));
+        assertEquals(610L, Day5.part2(input));
 
 
     }

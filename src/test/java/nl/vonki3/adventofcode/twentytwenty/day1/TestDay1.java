@@ -19,7 +19,7 @@ class TestDay1 {
         final Day1.Solution solution1 = Day1.part1(input);
         final Day1.Solution solution2 = Day1.part2(input);
 
-        assertEquals(514579l, solution1.getSolution());
-        assertEquals(241861950l, solution2.getSolution());
+        assertEquals(514579L, solution1.getSolution());
+        assertEquals(241861950L, solution2.getSolution());
     }
 }
