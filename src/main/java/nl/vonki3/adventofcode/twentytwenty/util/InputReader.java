@@ -17,6 +17,7 @@ public class InputReader<U> {
             result = lines.map(mapper::map).collect(Collectors.toList());
         }
 
+        result.forEach(System.out::println);
         return result;
     }
 }
