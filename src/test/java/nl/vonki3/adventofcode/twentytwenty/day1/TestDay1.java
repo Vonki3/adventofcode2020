@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import nl.vonki3.adventofcode.twentytwenty.util.InputReader;
+import nl.vonki3.adventofcode.twentytwenty.util.IntegerInputMapper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 

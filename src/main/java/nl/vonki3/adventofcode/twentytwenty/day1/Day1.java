@@ -6,6 +6,7 @@ import java.util.List;
 
 import lombok.Data;
 import nl.vonki3.adventofcode.twentytwenty.util.InputReader;
+import nl.vonki3.adventofcode.twentytwenty.util.IntegerInputMapper;
 
 public class Day1 {
     public static void main(final String[] args) throws IOException {

@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import nl.vonki3.adventofcode.twentytwenty.day3.Day3;
-import nl.vonki3.adventofcode.twentytwenty.day3.Day3InputMapper;
 import nl.vonki3.adventofcode.twentytwenty.util.InputReader;
+import nl.vonki3.adventofcode.twentytwenty.util.StringInputMapper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestDay5 {
