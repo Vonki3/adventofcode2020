@@ -1,4 +1,4 @@
-package nl.vonki3.adventofcode.twentytwenty.day5;
+package nl.vonki3.adventofcode.twentytwenty.util;
 
 import nl.vonki3.adventofcode.twentytwenty.util.MapInputInterface;
 
