@@ -17,12 +17,8 @@ R
 "src/main/resources/input-day-5.txt,3\a\3abc5d19cd229a363d111511884f950eecf069f3
 R
 "src/test/resources/input-day-5.txt,4\8\4898b7a3d0dafd7cb93e591190fa01bdb3b5144f
-~
-Nsrc/main/java/nl/vonki3/adventofcode/twentytwenty/day1/IntegerInputMapper.java,e\a\ea997b2dd530080641804f81ab7f936f1ea1e9ff
 }
 Msrc/main/java/nl/vonki3/adventofcode/twentytwenty/util/MapInputInterface.java,f\d\fd470123198d8dc80b6784d7719d9fa9288dbcd3
-}
-Msrc/main/java/nl/vonki3/adventofcode/twentytwenty/day5/StringInputMapper.java,9\f\9fa730c89e2cf1df0de2859e1a418a2b3cb6850b
 t
 Dsrc/test/java/nl/vonki3/adventofcode/twentytwenty/day1/TestDay1.java,e\0\e0fd0aa096130e87dccd3121393b7ba537605e8f
 t
@@ -39,12 +35,8 @@ x
 Hsrc/main/java/nl/vonki3/adventofcode/twentytwenty/day6/PassengerSet.java,6\e\6ef1ee75c99c466c2e521ce91967c562753990bd
 y
 Isrc/main/java/nl/vonki3/adventofcode/twentytwenty/day6/PassengerList.java,7\d\7def3cb8e53ac4bafb2cc7b06f44f13338b0bf2b
-u
-Esrc/main/java/nl/vonki3/adventofcode/twentytwenty/day6/Passenger.java,a\c\accaa90ac83e125f6c7d35d1cc11feafd0fa7b06
 p
 @src/main/java/nl/vonki3/adventofcode/twentytwenty/day4/Day4.java,9\0\9074b9608e65ed44149ffe4efb5c4542eda00bc9
-z
-Jsrc/main/java/nl/vonki3/adventofcode/twentytwenty/day6/PassengerGroup.java,d\2\d2f01950cc0e26d248c4da6b47393fb90522f0d6
 t
 Dsrc/test/java/nl/vonki3/adventofcode/twentytwenty/day6/TestDay6.java,e\4\e4a8643751e39fce997079b6d670ab2bc74ebd31
 p
