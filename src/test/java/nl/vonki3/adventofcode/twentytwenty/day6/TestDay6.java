@@ -1,20 +1,9 @@
 package nl.vonki3.adventofcode.twentytwenty.day6;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import nl.vonki3.adventofcode.twentytwenty.day5.Day5;
-import nl.vonki3.adventofcode.twentytwenty.day5.StringInputMapper;
-import nl.vonki3.adventofcode.twentytwenty.util.InputReader;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestDay6 {

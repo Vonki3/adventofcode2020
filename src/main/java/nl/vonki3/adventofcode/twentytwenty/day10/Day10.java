@@ -2,7 +2,9 @@ package nl.vonki3.adventofcode.twentytwenty.day10;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
 import com.sun.org.slf4j.internal.Logger;
@@ -13,6 +15,7 @@ import nl.vonki3.adventofcode.twentytwenty.util.LongInputMapper;
 
 public class Day10 {
     private static final Logger LOG = LoggerFactory.getLogger(Day10.class);
+    private final static List<List<Long>> possibleAdapterArrangements = new ArrayList<>();
 
     public static void main(final String[] args) throws IOException {
         final InputReader<Long> reader = new InputReader<>();
@@ -33,62 +36,61 @@ public class Day10 {
         long prevJolt = 0;
         final List<Long> sortedInput = input.stream().sorted().collect(Collectors.toList());
         for (Long jolt : sortedInput) {
-            if (jolt-prevJolt==1) nr1Jolt ++;
-            if (jolt-prevJolt==3) nr3Jolt ++;
+            if (jolt - prevJolt == 1) {
+                nr1Jolt++;
+            }
+            if (jolt - prevJolt == 3) {
+                nr3Jolt++;
+            }
             prevJolt = jolt;
         }
-        nr3Jolt ++; // for device: always 3 higher then last adapter;
+        nr3Jolt++; // for device: always 3 higher then last adapter;
         return nr1Jolt * nr3Jolt;
     }
 
     static long part2(final List<Long> input) {
         input.add(0L);
         final List<Long> sortedInput = input.stream().sorted().collect(Collectors.toList());
-        sortedInput.add(sortedInput.get(sortedInput.size()-1)+3);
+        sortedInput.add(sortedInput.get(sortedInput.size() - 1) + 3);
 
         System.out.println("sorted:");
         System.out.println(sortedInput);
         System.out.println("===========");
 
-        final List<List<Long>> possibleAdapterArrangements = new ArrayList<>();
         possibleAdapterArrangements.add(sortedInput);
-        recursive(sortedInput, possibleAdapterArrangements, 0);
+        recursive(sortedInput);
 
+//        System.out.println("===========");
+        final List<List<Long>> sorted = possibleAdapterArrangements.stream().sorted(Comparator.comparingInt((ToIntFunction<List>) List::size)).collect(Collectors.toList());
+        sorted.forEach(System.out::println);
         return possibleAdapterArrangements.size();
     }
 
-    private static List<Long> getDeletableAdapters(final List<Long> sortedInput) {
-        final List<Long> deletableAdapters = new ArrayList<>();
-
-        for (int i = 0; i < sortedInput.size()-2; i++) {
-            if (sortedInput.get(i)+3>= sortedInput.get(i+2)) {
-                deletableAdapters.add(sortedInput.get(i+1));
+    private static int getFirstDeletableAdapterIndex(final List<Long> input, final int startIndex) {
+        for (int i = startIndex; i < input.size() - 2; i++) {
+            if (input.get(i) + 3 >= input.get(i + 2)) {
+                return i + 1;
             }
         }
-
-        return deletableAdapters;
+        return -1;
     }
 
-    private static void recursive(final List<Long> sortedInput, final List<List<Long>> possibleAdapterArrangements, final int ptr) {
-        System.out.println("ptr: " + ptr);
-        final List<Long> deletableAdapters = getDeletableAdapters(sortedInput);
-
-        deletableAdapters.forEach(jolt -> {
-            final List<Long> newInput = new ArrayList<>(sortedInput);
-            newInput.remove(sortedInput.indexOf(jolt));
+    private static void recursive(final List<Long> input) {
+//        System.out.println("==========");
+//        System.out.println(input);
+        List<Long> newInput = input;
+        int deletableAdapterIndex = getFirstDeletableAdapterIndex(input, 0);
+        while (deletableAdapterIndex != -1) {
+//            System.out.println("-----------");
+//            System.out.println("deleting " + deletableAdapterIndex);
+            newInput = new ArrayList<>(newInput);
+            newInput.remove(deletableAdapterIndex);
+//            if (possibleAdapterArrangements.stream().noneMatch(l -> l.hashCode() == newInput.hashCode())) {
             possibleAdapterArrangements.add(newInput);
-        });
-
-//        for(int i = ptr; i < sortedInput.size()-2; i++) {
-//            if (sortedInput.get(i)+3>=sortedInput.get(i+2)) {
-//                final List<Long> newInput = new ArrayList<>(sortedInput);
-//                newInput.remove(i+1);
-//                possibleAdapterArrangements.add(newInput);
+            recursive(newInput);
 //            }
-//        }
-        System.out.println("nr answers: " + possibleAdapterArrangements.size());
-        if (ptr < sortedInput.size()-3) {
-            possibleAdapterArrangements.forEach(input -> recursive(input, possibleAdapterArrangements, ptr + 1));
+//            System.out.println(newInput);
+            deletableAdapterIndex = getFirstDeletableAdapterIndex(newInput, deletableAdapterIndex - 1);
         }
     }
 
