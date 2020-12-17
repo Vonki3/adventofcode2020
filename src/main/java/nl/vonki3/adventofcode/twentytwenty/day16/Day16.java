@@ -3,10 +3,12 @@ package nl.vonki3.adventofcode.twentytwenty.day16;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.StringUtils;
 
 import nl.vonki3.adventofcode.twentytwenty.util.InputReader;
 import nl.vonki3.adventofcode.twentytwenty.util.StringInputMapper;
@@ -14,7 +16,7 @@ import nl.vonki3.adventofcode.twentytwenty.util.StringInputMapper;
 public class Day16 {
 
     public static void main(final String[] args) throws IOException {
-        List<Integer> input = Day16.read("src/main/resources/input-day-16.txt");
+        Input input = Day16.read("src/main/resources/input-day-16.txt");
         long part1 = Day16.part1(input);
 
         System.out.println("\nDay 16-1:");
@@ -26,107 +28,100 @@ public class Day16 {
         System.out.println("solution = " + part2);
     }
 
-    static long part1(final List<Integer> input) {
-        int turn = input.size();
+    static long part1(final Input input) {
+        final List<Integer> validValues = new ArrayList<>();
+        input.getKlasses().stream().map(k -> validValues.addAll(k.getValidNumbers())).collect(Collectors.toList());
+//        System.out.println(validValues);
 
-        while (turn != 2020) {
-            final Integer curNr = input.get(turn - 1);
-            int prevIndex = getPrevIndex(input, curNr, turn - 1);
-            if (prevIndex == -1) {
-                input.add(new Integer(0));
-            } else {
-                final Integer newNr = new Integer((turn - 1 - prevIndex));
-                input.add(newNr);
-            }
-            turn++;
-        }
-
-        return input.get(input.size() - 1);
-    }
-
-    public static int getPrevIndex(final List<Integer> input, final Integer curNr, final int prevIndex) {
-        int index = prevIndex - 1;
-        while (index >= 0 && !input.get(index).equals(curNr)) {
-            index--;
-            // do nothing
-        }
-
-        return index < 0 ? -1 : index;
-    }
-
-
-    static long part2(final List<Integer> input) {
-        Map<Integer, List<Integer>> nrLastUsed = new HashMap<>();
-        input.forEach(nr -> {
-            final List<Integer> list = new ArrayList<>();
-            list.add(nrLastUsed.size());
-            nrLastUsed.put(nr, list);
+        final List<Integer> invalidValues = new ArrayList<>();
+        input.getNearbyTickets().forEach(ticket -> {
+            invalidValues.addAll(ticket.stream().map(t -> t.intValue())
+                    .filter(nr -> validValues.stream().noneMatch(klasseNr -> klasseNr.equals(nr)))
+                    .collect(Collectors.toList()));
         });
-        System.out.println(nrLastUsed);
 
-        int turn = input.size();
-
-        while (turn != 30000000) {
-            if (turn % 100000 == 0) {
-                System.out.println((turn + 1) + ") ");
-            }
-            if (turn < 10) {
-                System.out.println("Input:\t\t"+ input);
-                System.out.println("nrLastUsed:\t"+ nrLastUsed);
-            }
-
-            final int indexOfLastSpokenNumber = input.size()-1;
-            final int lastSpokenNumber = input.get(indexOfLastSpokenNumber);
-            final List<Integer> previousTurns = nrLastUsed.get(lastSpokenNumber);
-
-            if (isLastSpokenNr(indexOfLastSpokenNumber, previousTurns)){
-                input.add(0);
-                addNewNr(input, nrLastUsed, turn, 0);
-            }
-            else {
-                final Integer turnOfLastSpokenNr = previousTurns.get(previousTurns.size() - 1);
-                final int newNr = previousTurns.size() == 1
-                        ? (turn - 1 - turnOfLastSpokenNr)
-                        : (turnOfLastSpokenNr - previousTurns.get(previousTurns.size() - 2));
-                addNewNr(input, nrLastUsed, turn, newNr);
-            }
-            turn++;
-        }
-
-        System.out.println("Size: " + input.size());
-        return input.get(input.size() - 1);
+//        System.out.println(invalidValues);
+        return invalidValues.stream().mapToLong(id -> id).sum();
     }
 
-    private static void addNewNr(final List<Integer> input, final Map<Integer, List<Integer>> orderedInput, final int turn, final int newNr) {
-        input.add(newNr);
-        List<Integer> orderOfNewNr = orderedInput.get(newNr);
-        if (orderOfNewNr == null) {
-            orderOfNewNr = new ArrayList<>();
-            orderedInput.put(newNr, orderOfNewNr);
-        } else if (orderOfNewNr.size() == 2) {
-            orderOfNewNr.remove(0); // prevents growth of the list, you only need the last 2 references
-        }
-        orderOfNewNr.add(turn);
+
+    static long part2(final Input input) {
+        final Set<Integer> validValues = new TreeSet<>();
+        input.getKlasses().stream().map(k -> validValues.addAll(k.getValidNumbers())).collect(Collectors.toList());
+        System.out.println(validValues);
+
+        final List<Ticket> validTickets = new ArrayList<>();
+        input.getNearbyTickets().forEach(ticket -> {
+            if (ticket.stream()
+                    .allMatch(nr -> validValues.stream()
+                            .anyMatch(klasseNr -> klasseNr.equals(nr))
+                    )
+            ) {
+                validTickets.add(ticket);
+            }
+        });
+
+        System.out.println(validTickets);
+
+        validTickets.forEach(ticket -> {
+            ticket.forEach(nr -> {
+                input.getKlasses().
+            });
+        });
+//        return invalidValues.stream().mapToLong(id -> id).sum();
+        return 0L;
     }
 
-    private static boolean isLastSpokenNr(final int sizeOfSpokenNumbers, final List<Integer> previousTurns) {
-        final Integer lastIndexOfLastSpokenNumber = previousTurns.get(previousTurns.size() - 1);
-        return (sizeOfSpokenNumbers-1) == lastIndexOfLastSpokenNumber;
-    }
-
-    static List<Integer> read(final String fileName) throws IOException {
+    static Input read(final String fileName) throws IOException {
         System.out.println("reading");
         System.out.println("==========");
         InputReader<String> reader = new InputReader<>();
-        final List<String> input = reader.readInput(fileName, new StringInputMapper());
+        final List<String> inputValues = reader.readInput(fileName, new StringInputMapper());
+        final Input input = new Input();
+        boolean nextKlasses = false;
+        boolean nextNearbyTickets = false;
 
-        final String[] split = input.get(0).split(",");
-        final List<Integer> result = Arrays.stream(split).map(Integer::valueOf).collect(Collectors.toList());
+        for (final String line : inputValues) {
+            if (!nextKlasses && !nextNearbyTickets && !"your ticket:".equals(line)) {
+                input.getKlasses().add(new Klasse(line));
+                continue;
+            }
+            if ("your ticket:".equals(line)) {
+                nextKlasses = true;
+                nextNearbyTickets = false;
+                continue;
+            }
+            if ("nearby tickets:".equals(line)) {
+                nextKlasses = false;
+                nextNearbyTickets = true;
+                continue;
+            }
 
-        System.out.println(result);
-        System.out.println("==========");
+            if (nextKlasses) {
+                input.getMyTicket().addAll(
+                        Arrays.stream(line.split(","))
+                                .filter(StringUtils::isNotBlank)
+                                .map(Integer::valueOf)
+                                .collect(Collectors.toList()));
+                continue;
+            }
 
-        return result;
+            if (nextNearbyTickets) {
+                final Ticket ticket = new Ticket();
+                ticket.addAll(
+                        Arrays.stream(line.split(","))
+                                .filter(StringUtils::isNotBlank)
+                                .map(Integer::valueOf)
+                                .collect(Collectors.toList()));
+                input.getNearbyTickets().add(ticket);
+                continue;
+            }
+        }
+
+//        System.out.println("input = " + input);
+//        System.out.println("==========");
+
+        return input;
     }
 
 }

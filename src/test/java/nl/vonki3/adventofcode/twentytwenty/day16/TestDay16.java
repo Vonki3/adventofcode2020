@@ -13,15 +13,15 @@ class TestDay16 {
 
     @Test
     void testPart1 () throws IOException {
-        final List<Integer> input = Day16.read("src/test/resources/input-day-16.txt");
-        assertEquals(436L, Day16.part1(input));
+        final Input input = Day16.read("src/test/resources/input-day-16.txt");
+        assertEquals(71L, Day16.part1(input));
     }
 
     // don't forget to set -Xmx1024M to prevent OOM
     @Test
     void testPart2 () throws IOException {
-        final List<Integer> input = Day16.read("src/test/resources/input-day-16.txt");
-        assertEquals(175594L, Day16.part2(input));
+        final Input input = Day16.read("src/test/resources/input-day-16-2.txt");
+        assertEquals(11*12*13L, Day16.part2(input));
     }
 
 

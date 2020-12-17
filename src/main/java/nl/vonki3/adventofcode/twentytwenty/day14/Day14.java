@@ -2,12 +2,9 @@ package nl.vonki3.adventofcode.twentytwenty.day14;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import nl.vonki3.adventofcode.twentytwenty.util.InputReader;
 import nl.vonki3.adventofcode.twentytwenty.util.StringInputMapper;
