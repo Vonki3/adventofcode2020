@@ -17,7 +17,7 @@ public class Day19 {
         System.out.println("solution = " + part1); // should be 285, regex is good, but with input it comes up with result 0
 
         input = Day19.read("src/main/resources/input-day-19-2.txt");
-        long part2 = Day19.part2(input);
+        long part2 = Day19.part1(input);
         System.out.println("\nDay 19-2:");
         System.out.println("solution = " + part2);
     }
@@ -25,22 +25,22 @@ public class Day19 {
     static long part1(final Day19Input input) {
         final Pattern pattern = Pattern.compile(input.rules.get(0));
         System.out.println(input.rules.get(0));
-        return input.messages.stream()
-                .filter(message -> pattern.matcher(message).matches())
-                .count();
-//        int nrMatches = 0;
-//        for (final String message : input.messages) {
-//            Matcher matcher = pattern.matcher(message);
-//            if (matcher.matches()) {
-//                nrMatches++;
-//                System.out.println("Matched: " + message + " -> " + matcher.group());
-//            }
-//            else {
-//                System.out.println("NO match: " + message);
-//            }
-//        }
-//
-//        return nrMatches;
+//        return input.messages.stream()
+//                .filter(message -> pattern.matcher(message).matches())
+//                .count();
+        int nrMatches = 0;
+        for (final String message : input.messages) {
+            Matcher matcher = pattern.matcher(message);
+            if (matcher.matches()) {
+                nrMatches++;
+                System.out.println("Matched: " + message + " -> " + matcher.group());
+            }
+            else {
+                System.out.println("NO match: " + message);
+            }
+        }
+
+        return nrMatches;
     }
 
     static long part2(final Day19Input input) {
