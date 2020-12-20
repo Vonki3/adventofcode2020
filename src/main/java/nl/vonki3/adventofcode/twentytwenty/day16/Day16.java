@@ -63,11 +63,11 @@ public class Day16 {
 
         System.out.println(validTickets);
 
-        validTickets.forEach(ticket -> {
-            ticket.forEach(nr -> {
-                input.getKlasses().
-            });
-        });
+//        validTickets.forEach(ticket -> {
+//            ticket.forEach(nr -> {
+//                input.getKlasses().
+//            });
+//        });
 //        return invalidValues.stream().mapToLong(id -> id).sum();
         return 0L;
     }
